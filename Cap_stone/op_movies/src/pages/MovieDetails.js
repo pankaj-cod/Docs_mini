@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../styles/Details.css";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -11,14 +12,17 @@ const MovieDetails = () => {
       .then((data) => setMovie(data));
   }, [id]);
 
-  if (!movie) return <div className="p-4">Loading...</div>;
+  if (!movie) return <div className="status-text">Loading...</div>;
 
   return (
-    <div className="details">
-      <h1 className="main_title">{movie.Title}</h1>
-      <img src={movie.Poster} alt={movie.Title} className="my-4" />
-      <p><strong>Year:</strong> {movie.Year}</p>
-      <p><strong>Plot:</strong> {movie.Plot}</p>
+    <div className="details-container">
+      <img src={movie.Poster} alt={movie.Title} className="details-poster" />
+      <div className="details-info">
+        <h1>{movie.Title}</h1>
+        <p><strong>Year:</strong> {movie.Year}</p>
+        <p><strong>Genre:</strong> {movie.Genre}</p>
+        <p><strong>Plot:</strong> {movie.Plot}</p>
+      </div>
     </div>
   );
 };
